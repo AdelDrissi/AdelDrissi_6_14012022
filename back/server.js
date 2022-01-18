@@ -1,7 +1,15 @@
-const http = require('http');
-const app = require('./app');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const server = http.createServer(app);
+const sauces = require('./models/sauces');
 
-const dotenv = require('dotenv');
-dotenv.config();
+app.get('/', (req, res) => {
+  res.json(sauces);
+});
+
+app.listen(port, () => {
+  console.log(
+    "Cette app tourne actuellement à l'adresse http://localhost:" + port
+  );
+});
