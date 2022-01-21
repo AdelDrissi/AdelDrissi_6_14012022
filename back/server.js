@@ -4,6 +4,8 @@ const port = 3000;
 
 const sauces = require('./models/sauces');
 
+app.post('/signup', () => console.log('Tu as cliqué sur signup'));
+
 app.get('/', (req, res) => {
   res.json(sauces);
 });
