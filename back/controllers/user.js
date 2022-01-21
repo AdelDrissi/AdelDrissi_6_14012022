@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const { json } = require('express');
+const jwt = require('jsonwebtoken');
 const user = require('../models/user');
 
 exports.signup = (req, res, next) => {
@@ -14,7 +16,7 @@ exports.signup = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Utilisateur créé ! ' }))
         .catch((error) => res.status(500).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(500).json({ message: 'erreur' }));
 };
 exports.login = (req, res, next) => {
   user
@@ -31,10 +33,12 @@ exports.login = (req, res, next) => {
           }
           res.status(200).json({
             userId: user._id,
-            token: 'TOKEN',
+            token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
+              expiresIn: '24h',
+            }),
           });
         })
         .catch((error) => res.status(500).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => res.status(500).json({ message: 'mdr' }));
 };

@@ -2,7 +2,7 @@
 const express = require('express');
 
 // CREATION ROUTER //
-const router = express.router();
+const router = express.Router();
 
 // CONTROLLER POUR DIFFERENTES ROUTES //
 

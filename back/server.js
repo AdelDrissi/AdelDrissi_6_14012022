@@ -1,17 +1,7 @@
-const express = require('express');
-const app = express();
-const port = 3000;
 
-const sauces = require('./models/sauces');
-
-app.post('/signup', () => console.log('Tu as cliqué sur signup'));
-
-app.get('/', (req, res) => {
-  res.json(sauces);
-});
-
-app.listen(port, () => {
-  console.log(
-    "Cette app tourne actuellement à l'adresse http://localhost:" + port
-  );
-});
+const http = require('http');
+const app = require('./app');
+app.set('port', process.env.PORT || 3000);
+const server = http.createServer(app);
+server.listen(process.env.PORT || 3000);
+console.log(`Listening on port: ${server.address().port}`);
