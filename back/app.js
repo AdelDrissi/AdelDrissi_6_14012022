@@ -17,7 +17,7 @@ app.use(express.json());
 
 // Import routers //
 const userRoutes = require('./routes/user');
-const sauceRoutes = require('./routes/sauces');
+const sauceRoutes = require('./routes/sauce');
 
 const allowCrossDomain = function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
