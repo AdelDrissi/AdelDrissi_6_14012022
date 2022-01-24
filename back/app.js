@@ -33,7 +33,8 @@ const allowCrossDomain = function (req, res, next) {
 };
 app.use(allowCrossDomain);
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
-// app.use('/api/sauce', sauceRoutes);
+app.use('/api/sauce', sauceRoutes);
 
 module.exports = app;

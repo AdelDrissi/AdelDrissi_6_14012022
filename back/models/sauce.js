@@ -1,7 +1,8 @@
 // IMPORT MONGOOSE //
 const mongoose = require('mongoose');
 
-// CREATION DU SCHEMA //
+
+// CREATION OF THE DIAGRAM //
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
@@ -15,5 +16,5 @@ const sauceSchema = mongoose.Schema({
   usersLiked: [{ type: String }],
 });
 
-// EXPORTATTION DU MODELE //
-module.exports = mongoose.model('Sauce', sauceSchema);
+// MODEL EXPORT //
+module.exports = mongoose.model('sauce', sauceSchema);

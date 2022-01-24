@@ -1,14 +1,7 @@
-//--------------//
 // Import model //
-//--------------//
+
 const Sauce = require('../models/sauce');
-//----------------------------//
-// Import file system package //
-//----------------------------//
-const fs = require('fs');
-//-------------------------------------//
-// Exports the logic of the POST route //
-//-------------------------------------//
+
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
   const sauce = new Sauce({
@@ -28,22 +21,22 @@ exports.createSauce = (req, res, next) => {
     )
     .catch((error) => res.status(400).json({ error }));
 };
-//-------------------------------------//
+
 // Exports the logic of the GET route  //
-//-------------------------------------//
+
 exports.readSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error }));
 };
-//-------------------------------------//
+
 // Exports the logic of the PUT route  //
-//-------------------------------------//
+
 exports.updateSauce = (req, res, next) => {
   if (req.file) {
     Sauce.findOne({ _id: req.params.id })
       .then((sauce) => {
-        // Delete the previous image before saving the new one
+        // Delete the previous image before saving the new one//
         const fileName = sauce.imageUrl.split('/images/')[1];
         fs.unlink(`images/${fileName}`, () => {
           const sauceObject = {
@@ -75,9 +68,9 @@ exports.updateSauce = (req, res, next) => {
       .catch((error) => res.status(400).json({ error }));
   }
 };
-//---------------------------------------//
+
 // Exports the logic of the DELETE route //
-//---------------------------------------//
+
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
@@ -92,20 +85,20 @@ exports.deleteSauce = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
-//-----------------------------------------------//
+
 // Exports the logic of the GET all sauces route //
-//-----------------------------------------------//
+
 exports.readAllSauces = (req, res, next) => {
   Sauce.find()
     .then((sauces) => res.status(200).json(sauces))
     .catch((error) => res.status(400).json({ error }));
 };
-//---------------------------------------------//
+
 // Exports the logic of the like/dislike route //
 // Case number 1 to add a like                 //
 // Case number 0 to remove a like or a dislike //
 // Case number -1 to add a dislike             //
-//---------------------------------------------//
+
 exports.likeDislike = (req, res, next) => {
   const like = req.body.like;
   // switch evaluates an expression and, depending on the result obtained and the associated case, executes the corresponding statements.
@@ -162,4 +155,9 @@ exports.likeDislike = (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
       break;
   }
+};
+// Exports the logic of the POST route //
+
+module.exports.createSauce = (req, res, next) => {
+  res.status(200).end();
 };
