@@ -20,6 +20,6 @@ router.put('/:id', auth, multer, sauceControl.updateSauce);
 router.delete('/:id', auth, sauceControl.deleteSauce);
 
 //READ ALL SAUCES//
-router.get('/', sauceControl.createSauce);
+router.get('/', auth, sauceControl.readAllSauces);
 
 module.exports = router;
