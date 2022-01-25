@@ -22,4 +22,7 @@ router.delete('/:id', auth, sauceControl.deleteSauce);
 //READ ALL SAUCES//
 router.get('/', auth, sauceControl.readAllSauces);
 
+// Like or Dislike //
+router.post('/:id/like', auth, sauceControl.likeDislike);
+
 module.exports = router;

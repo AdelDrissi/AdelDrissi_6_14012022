@@ -13,8 +13,10 @@ exports.createSauce = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
+   likes: 0,
     dislikes: 0,
     usersLiked: [],
+    usersDisliked: [],
   });
   sauce
     .save()
@@ -162,6 +164,3 @@ exports.likeDislike = (req, res, next) => {
 };
 // Exports the logic of the POST route //
 
-module.exports.createSauce = (req, res, next) => {
-  res.status(200).end();
-};
