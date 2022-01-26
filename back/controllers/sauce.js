@@ -13,7 +13,7 @@ exports.createSauce = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
     }`,
-   likes: 0,
+    likes: 0,
     dislikes: 0,
     usersLiked: [],
     usersDisliked: [],
@@ -31,6 +31,8 @@ exports.createSauce = (req, res, next) => {
 // Exports the logic of the GET route  //
 
 exports.readSauce = (req, res, next) => {
+  console.log(req.params.id);
+  console.log(Sauce);
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error }));
@@ -163,4 +165,3 @@ exports.likeDislike = (req, res, next) => {
   }
 };
 // Exports the logic of the POST route //
-

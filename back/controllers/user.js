@@ -13,14 +13,15 @@ exports.signup = (req, res, next) => {
       });
       userAd
         .save()
-        .then(() =>
-          res.status(201).json({ message: 'Utilisateur crée !' })
-        )
+        .then(() => res.status(201).json({ message: 'Utilisateur crée !' }))
         .catch((error) => {
           res.status(400).json({ error });
         });
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).json({ error });
+    });
 };
 exports.login = (req, res, next) => {
   user

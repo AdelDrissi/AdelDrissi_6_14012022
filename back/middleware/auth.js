@@ -1,6 +1,4 @@
-//----------------//
 // Import package //
-//----------------//
 const jwt = require('jsonwebtoken');
 
 // Exports middleware //
