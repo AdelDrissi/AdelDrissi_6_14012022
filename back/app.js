@@ -5,6 +5,10 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 
+//DOTENV FOR ENVIRONMENT VARIABLES//
+const dotenv = require('dotenv');
+dotenv.config();
+
 mongoose
   .connect(
     'mongodb+srv://AdelDrissi:Boubou91480@cluster0.ndmyy.mongodb.net/Adel?retryWrites=true&w=majority',
