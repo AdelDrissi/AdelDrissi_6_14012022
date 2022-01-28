@@ -2,8 +2,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-const cors = require('cors');
 const path = require('path');
+const helmet = require('helmet');
 
 //DOTENV FOR ENVIRONMENT VARIABLES//
 const dotenv = require('dotenv');
@@ -20,6 +20,7 @@ mongoose
 //Transform req on JSON //
 
 app.use(express.json());
+app.use(helmet.permittedCrossDomainPolicies());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -34,10 +35,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
-
 // Import routers //
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user.routes');
 const sauceRoutes = require('./routes/sauce');
 
 app.use('/images', express.static(path.join(__dirname, 'images')));

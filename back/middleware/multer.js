@@ -1,24 +1,22 @@
-// Import multer //
+//multer est un package de gestion de fichiers
 const multer = require('multer');
-// Dictionary //
+
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png',
-  'image/webp': 'webp',
 };
 
-// Create config object //
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, 'images');
   },
   filename: (req, file, callback) => {
-    const name = file.originalname.split(' ').join('_');
+    const name = file.originalname.split('.')[0].split(' ').join('_');
+    console.log()
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now() + '.' + extension);
+    callback(null, name + '_' + Date.now() + '.' + extension);
   },
 });
 
-// Exports multer //
-module.exports = multer({ storage: storage }).single('image');
+module.exports = multer({ storage }).single('image');
