@@ -4,6 +4,7 @@ const { json } = require('express');
 const jwt = require('jsonwebtoken');
 const user = require('../models/user');
 const dotenv = require('dotenv');
+const maskData = require('maskdata');
 dotenv.config();
 
 exports.signup = (req, res, next) => {
@@ -11,7 +12,7 @@ exports.signup = (req, res, next) => {
     .hash(req.body.password, 10)
     .then((hash) => {
       const userAd = new user({
-        email: req.body.email,
+        email: maskData.maskEmail2(req.body.email),
         password: hash,
       });
       userAd
@@ -28,7 +29,7 @@ exports.signup = (req, res, next) => {
 };
 exports.login = (req, res, next) => {
   user
-    .findOne({ email: req.body.email })
+    .findOne({ email: maskData.maskEmail2(req.body.email) })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: 'Utilisateur non trouvé !' });
